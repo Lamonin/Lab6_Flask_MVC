@@ -1,0 +1,129 @@
+/* меню страниц */
+.menu {
+    background-color: #f1f1f1;
+    box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+/*Теперь уберем маркеры со списка и произведем выравнивание его элементов в одну
+линию*/
+.menu li {
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px;
+    color: #6f6d6d;
+}
+
+.menu a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    color: #6f6d6d;
+}
+
+.menu li:hover {
+    background-color: #f87777;
+    cursor: pointer;
+    color: #f8f8f8;
+}
+
+.menu ul {
+    padding: 0px;
+}
+
+.active {
+    background-color: #f87777;
+    color: #f8f8f8;
+}
+
+.active a:visited {
+    color: #f8f8f8;
+}
+
+.menu a:hover {
+    color: #f8f8f8;
+}
+
+.block {
+    padding: 10px 20px;
+}
+
+.table {
+    width: 100%;
+    margin: 0 auto 20px;
+    border: 1px solid #dddddd;
+    border-collapse: collapse;
+}
+
+.table_header {
+    text-align: center;
+}
+
+.table th {
+    font-weight: bold;
+    padding: 5px;
+    background: #efefef;
+    border: 1px solid #dddddd;
+}
+
+.table td {
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    text-align: left;
+}
+
+
+.table tbody tr:nth-child(odd) {
+    background: #fff;
+}
+
+.table tbody tr:nth-child(even) {
+    background: #F7F7F7;
+}
+
+.search_body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: auto;
+    column-gap: 16px;
+}
+
+.search_left_panel {
+    padding: 8px;
+    border: 1px solid lightgrey;
+    box-shadow: grey 0 0 5px;
+    align-self: start;
+    border-radius: 4px;
+}
+
+.search_left_panel details+details {
+    margin-top: 16px;
+}
+
+.search_selected_filters {
+    color: #ff2a4f
+}
+
+.search_books {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.search_books>div {
+    box-shadow: grey 0 0 5px;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.search_books>div>p {
+    margin: 0;
+    padding: 0;
+}
+
+.search_books>div>input {
+    margin-left: auto;
+}
+
+.flex_aligned_right {
+    display: flex;
+    justify-content: right;
+}

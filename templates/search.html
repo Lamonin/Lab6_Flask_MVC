@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+    <title> Новый читатель </title>
+    {% macro render_filter(name, label, values, selected_values) %}
+        <details open>
+            <summary>{{ label }}</summary>
+            {% for i in range(len(values)) %}
+                <input name="{{ name }}" type="checkbox" {% if values.iloc[i, 0] in selected_values %}
+                       checked {% endif %} value="{{ values.iloc[i, 0] }}">
+                {{ values.iloc[i, 1] }} ({{ values.iloc[i, 2] }})
+                <br>
+            {% endfor %}
+        </details>
+    {% endmacro %}
+</head>
+<body>
+<div class=menu>
+    <ul>
+        <li class=active><a href="#">Поиск книг</a></li>
+    </ul>
+</div>
+<div class=block>
+    <div class="search_body">
+        <div class="search_left_panel">
+            <form action="" method="post">
+                {{ render_filter('genre_filter', 'Жанр', genres, selected_genres) }}
+                {{ render_filter('author_filter', 'Автор', authors, selected_authors) }}
+                {{ render_filter('publisher_filter', 'Издательство', publishers, selected_publishers) }}
+                <br>
+                <input name="filter" type="submit" value="Найти">
+                <input name="clear" type="submit" value="Очистить">
+            </form>
+        </div>
+        <div>
+            <form action="" method="post">
+                <input type="submit" name="back" value="Не выбирать книгу">
+            </form>
+            <p class="search_selected_filters">
+                <b>Жанры:</b>
+                {{ join_filter_list(genres, selected_genres) }}
+                <b>Авторы:</b> {{ join_filter_list(authors, selected_authors) }}
+                <b>Издательства:</b> {{ join_filter_list(publishers, selected_publishers) }}
+            </p>
+            <div class="search_books">
+                {% for i in range(len(filtered_books)) %}
+                    <div>
+                        <p>Название: {{ filtered_books.loc[i, "title"] }}</p>
+                        <p>Авторы: {{ filtered_books.loc[i, "authors_name"] }}</p>
+                        <p>Жанр: {{ filtered_books.loc[i, "genre_name"] }}</p>
+                        <p>Издательство: {{ filtered_books.loc[i, "publisher_name"] }}</p>
+                        <p>Год: {{ filtered_books.loc[i, "year_publication"] }}</p>
+                        <p>Кол-во: {{ filtered_books.loc[i, "available_numbers"] }}</p>
+                        <br>
+                        <div class="flex_aligned_right">
+                            <form action="" method="post">
+                                <input type="hidden" name="borrow_book_id" value="{{ filtered_books.iloc[i, 0] }}">
+                                <input type="submit" name="borrow_book" value="Выбрать"
+                                        {% if filtered_books.loc[i, "available_numbers"] <= 0 %} disabled {% endif %}>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
